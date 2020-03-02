@@ -1,0 +1,313 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Python批量合并文本文件 | 攻城狮小站</title>
+<link rel="shortcut icon" href="https://github.com/xinkqd/xinkqd.github.io/favicon.ico?v=1583152456398">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://github.com/xinkqd/xinkqd.github.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Python批量合并文本文件 | 攻城狮小站 - Atom Feed" href="https://github.com/xinkqd/xinkqd.github.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="
+全文约1336字，读完约5分钟
+
+这几天在Coursela（一个著名的MOOC平台）上报名参加了一门课程：Georgia Institute of Technology开设的Machine Design。
+Machine Design是一..." />
+    <meta name="keywords" content="Python" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://github.com/xinkqd/xinkqd.github.io">
+  <img class="avatar" src="https://github.com/xinkqd/xinkqd.github.io/images/avatar.png?v=1583152456398" alt="">
+  </a>
+  <h1 class="site-title">
+    攻城狮小站
+  </h1>
+  <p class="site-description">
+    记录我的学习成长历程
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Python批量合并文本文件
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-03-02
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://github.com/xinkqd/xinkqd.github.io/tag/XJvWXsgJf/" class="post-tag">
+                  # Python
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://gitee.com/qianbi_tou/uploadpic/raw/master/20200302/notebook.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <blockquote>
+<p>全文约1336字，读完约5分钟</p>
+</blockquote>
+<p>这几天在Coursela（一个著名的MOOC平台）上报名参加了一门课程：Georgia Institute of Technology开设的Machine Design。</p>
+<p>Machine Design是一门专业性很强的课程，主要讲述了诸如静力破坏和疲劳破坏理论、常见机械结构的分析，机械系统设计等内容。</p>
+<p>看了一下课程整体的信息及课程安排，课程全英文授课，无任何中文资源。而且里面用到了非常多的机械类专业名词，这些词虽然在以前的工作和学习生活中有所了解，但是仅仅是中文层面，英文层面还是一片空白的状态。为了保证后面学习的流畅性，我将课程视频的字幕稿下载了下来并为自己做了一个计划：在开始每周的学习前先将预习字幕稿，了解接下来一周课程的主要内容，尤其是用到的机械相关专有名。</p>
+<p>最终下载完成的第一周的字幕稿有11份之多。既然学习了<code>Python</code>，那就用<code>Python</code>编写一段程序，用来批量读取txt文件中的字幕稿并将其汇总后统一保存到一个<code>Markdown</code>文档中。这样便可以免去打开11次重复的打开txt文件并粘贴复制到<code>Markdown</code>文档的繁琐，可以提高转换效率。</p>
+<!-- TEASER_END -->
+<h1 data-tool="mdnice编辑器" style="margin-top: 40px; margin-bottom: 20px; font-weight: bold; color: black; border-bottom: 2px solid rgb(248,57,41); font-size: 1.3em;"><span style="display: inline-block; font-weight: normal; background: rgb(248,57,41); color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">一、所需材料</span></h1>
+<ul>
+<li>字幕稿文本文件若干</li>
+<li>Python开发环境</li>
+</ul>
+<h1 data-tool="mdnice编辑器" style="margin-top: 40px; margin-bottom: 20px; font-weight: bold; color: black; border-bottom: 2px solid rgb(248,57,41); font-size: 1.3em;"><span style="display: inline-block; font-weight: normal; background: rgb(248,57,41); color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">二、步骤</span></h1>
+<ul>
+<li>
+<p>通过迭代依次打开字幕稿文本文档并读取文件内的内容</p>
+<pre><code class="language-python"># 迭代读取字幕稿文本文档中的内容
+for n in range(rangew):
+	f=open(fname,encoding='utf-8')
+	ftxt = f.read()
+	text.append(ftxt)
+</code></pre>
+<p>其中：</p>
+<p>变量<code>fname</code>存放文件的文件名。</p>
+<p>txt文档中的内容通过Python提供的<code>file.read()</code>方法获取，并将获取到的文本内容赋值给<code>ftxt</code>。</p>
+<p>变量<code>text</code>为一个<code>List</code>，用于存储每个字幕稿文件中的内容。通过<code>List.append()</code>方法将<code>ftxt</code>的内容增加到<code>text</code>这个<code>List</code>中。</p>
+</li>
+<li>
+<p>将获取的内容保存到新的<code>Markdown</code>文档中</p>
+<p>经过测试，Python可以直接打开并保存<code>Markdown</code>的文件：</p>
+<pre><code class="language-python"># 写入Markdown文档
+fmd = open('subtitle.md','w')
+for t in range(len(text)):
+	fmd.write(text[t])
+fmd.close()
+</code></pre>
+<p>这里首先应用到了Python的<code>open()</code>函数：<code>open()</code>函数可以用于打开一个文件，创建一个<code>file</code>对象。</p>
+<p><code>open()</code>函数有两个参数：一个是<code>文件名name</code>，即上面的<code>transcript.md</code>，另一个是模式<code>mode</code>，用于确定文件的打开方式，即上面的<code>w</code>。通过<code>open()</code>函数，程序创建并打开了一个名为<code>subtitle.md</code>的文档。</p>
+<p>之后通过遍历，将上面获取到的内容依次写入<code>Markdown</code>文档。</p>
+</li>
+<li>
+<p>写入效果</p>
+<p><center><img src="https://gitee.com/qianbi_tou/uploadpic/tree/master/20200302/20030201.png" width="40%"></center></p>
+<center><font size=2>图1 运行代码生成文档顶部</font></center>
+<p><center><img src="https://gitee.com/qianbi_tou/uploadpic/tree/master/20200302/20030202.png" width="40%"></center></p>
+<center><font size=2>图2 运行代码生成文档（两字幕稿之间）</font></center>
+<p>总结一下，程序的功能算是完成了，但是汇总后的稿件看着好不舒服：</p>
+<p><center><img src="https://gitee.com/qianbi_tou/uploadpic/tree/master/expression/unhappy.jpg" width="20%"></center></p>
+<ol>
+<li>生成的文件没有目录不方便快速定位不同字幕稿；</li>
+<li>不同字幕稿之间没有明显的分界，不方便阅读和查找；</li>
+<li>句子断句跟随视频，中间很多被换行符断开，阅读不便。</li>
+</ol>
+</li>
+</ul>
+<h1 data-tool="mdnice编辑器" style="margin-top: 40px; margin-bottom: 20px; font-weight: bold; color: black; border-bottom: 2px solid rgb(248,57,41); font-size: 1.3em;"><span style="display: inline-block; font-weight: normal; background: rgb(248,57,41); color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">三、修改</span></h1>
+<p>分析一下，其实解决起来还是很简单的：</p>
+<ol>
+<li>
+<p><code>Markdown</code>文档中加入目录</p>
+<p><code>Markdown</code>中，要加入目录，只需要在文档正文前加入<code>[toc]</code>即可。</p>
+<p>这里通过向文档中写入字幕稿前先写入<code>[toc]</code>的方式解决。</p>
+</li>
+<li>
+<p>为文本增加标题</p>
+<p>为了增加辨识度且便于在文档中阅读，需要为每段字幕稿在开始的位置加入标题。</p>
+<p>这里通过为获取到的文本前和后增加对应字符串的方式解决。</p>
+</li>
+<li>
+<p>查找并替换文档中的换行符<code>\n</code>。</p>
+<p>这里选择通过使用<code>Python</code>的<code>replace()</code>方法将文本中的换行符<code>\n</code>替换掉，换成空格。</p>
+<p><code>replace()</code>方法需要输入2个参数，第一个参数即旧字符串（需要被替换掉的字符串），第二个参数即新字符串（需要的字符串）。</p>
+</li>
+</ol>
+<p>修改后的代码：</p>
+<pre><code class="language-python"># 1 迭代读取字幕稿文本文档中的内容
+for n in range(rangew):
+	f=open(fname,encoding='utf-8')
+	ftxt = f.read()
+    
+    # 替换换行符为空格
+	chtxt = ftxt.replace('\n', ' ')
+    
+    # 为Markdown文档插入标题
+	addfilename = '#Subtitle-' + str(n+1) + '\n' + chtxt 
+	text.append(addfilename)
+    
+# 2 写入Markdown文档
+fmd = open('transcript.md','w+')
+
+# 写入目录
+fmd.write('[toc]\n')
+
+for t in range(len(text)):
+	fmd.write(text[t])
+    
+    # 当前文档内容写入完成后加入换行符隔开两段内容
+	fmd.write('\n')
+fmd.close()
+</code></pre>
+<p>代码修改后的运行效果：</p>
+<p><center><img src="https://gitee.com/qianbi_tou/uploadpic/tree/master/20200302/20030205.png" width="40%"></center></p>
+<center><font size=2>图3 修改代码后生成文档</font></center>
+<p><center><img src="https://gitee.com/qianbi_tou/uploadpic/tree/master/20200302/20030204.png" width="40%"></center></p>
+<center><font size=2>图4 修改代码后生成文档（两字幕稿之间）</font></center>
+<h1 data-tool="mdnice编辑器" style="margin-top: 40px; margin-bottom: 20px; font-weight: bold; color: black; border-bottom: 2px solid rgb(248,57,41); font-size: 1.3em;"><span style="display: inline-block; font-weight: normal; background: rgb(248,57,41); color: #ffffff; padding: 3px 10px 1px; border-top-right-radius: 3px; border-top-left-radius: 3px; margin-right: 3px;">四、总结</span></h1>
+<p>对比代码修改前后生成的<code>Markdown</code>文档，代码修改后的文档颜值增加明显，十分便于阅读。</p>
+<p>以后工作中再遇到需要进行文字稿的批量汇总，调整一下代码就可以嗖的一下完成，可以为自己节省出更多的时间给思考。</p>
+<p><center><img src="https://gitee.com/qianbi_tou/uploadpic/tree/master/expression/happy.gif" width="20%"></center></p>
+<hr>
+<p><center><img src="E:\6 软件资料\Git\uploadpic\20200229\offical_qrcode.jpg" width="40%"></center></p>
+<p>如果你有什么想要和我交流的内容，欢迎关注我的微信公众号并留言︿(￣︶￣)︿</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://github.com/xinkqd/xinkqd.github.io/post/xlsx2txt/">
+              <h3 class="post-title">
+                一种Excel表格转txt文件的方法
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+<div align="center"><script async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><span id="busuanzi_container_site_pv">
+    本站总访问量<span id="busuanzi_value_site_pv"></span>次
+</span>
+
+<span id="busuanzi_container_page_pv">
+    文章点击次数:<span id="busuanzi_value_page_pv"></span>
+</span>
+  
+<span id="busuanzi_container_site_uv">
+    本站浏览量:<span id="busuanzi_value_site_uv"></span>
+</span><script src="//cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
+<script>
+    $(document).ready(
+        // 设置初始值
+        setInitialCount(0);
+    );
+    function setInitialCount(num) {
+        var busuanziSiteOffset = parseInt(num);
+ 
+        if ($("#busuanzi_container_site_pv").css("display") != "none") {
+            // 同理id也可以是busuanzi_container_page_pv
+            // busuanzi_container_site_uv
+            $("#busuanzi_value_site_pv").html(parseInt($("#busuanzi_value_site_pv").html()) + busuanziSiteOffset);
+        }
+    }
+</script>
+  Powered by  <a href="https://github.com/getgridea/gridea" target="_blank">  Gridea  </a>
+  <a class="rss" href="https://github.com/xinkqd/xinkqd.github.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
